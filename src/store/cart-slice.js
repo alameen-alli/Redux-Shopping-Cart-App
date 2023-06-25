@@ -8,6 +8,7 @@ const cartSlice = createSlice({
         showCart: false
     },
     reducers: {
+        // Add item to cart
         addToCart(state, action) {
             const newItem = action.payload;
             // to check if item is already available
@@ -27,6 +28,7 @@ const cartSlice = createSlice({
                 state.totalQuantity++;
             }
         },
+        // Remove item from cart
         removeFromCart(state, action) {
             const id = action.payload;
 
