@@ -8,6 +8,7 @@ import Auth from "./components/Auth";
 import Layout from "./components/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "./store/ui-slice";
+import { sendCartData } from "./store/cart-slice";
 let isFirstRender = true;
 
 function App() {
@@ -19,44 +20,14 @@ function App() {
   
 
   useEffect(() => {
-    const sendRequest = async () => {
 
-      if (isFirstRender) {
-        isFirstRender = false;
-        return
-      }
+    if (isFirstRender) {
+      isFirstRender = false;
+      return
+    };
 
-      //Send state as sending request
-      dispatch(uiActions.showNotification({
-        open: true,
-        message: "Sending Request",
-        type: 'warning'
-      }));
-
-      const res = await fetch("https://redux-http-ec343-default-rtdb.firebaseio.com/cartItems.json",
-      {
-        method: 'PUT',
-        body: JSON.stringify(cart)
-      });
-      const data = await res.json();
-
-      //Send state as request is successful.
-      dispatch(uiActions.showNotification({
-        open: true,
-        message: "Sent Request to Database Successfully",
-        type: 'success'
-      }));
-
-    }
-    sendRequest().catch((err) => {
-      // send state as error
-      dispatch(uiActions.showNotification({
-        open: true,
-        message: "Sending Request Failed",
-        type: 'error'
-      }));
-    })
-  }, [cart]);
+    dispatch(sendCartData(cart));
+  }, [cart, dispatch]);
 
   // if (notification && notification.type) {
   //   // Access the 'type' property
