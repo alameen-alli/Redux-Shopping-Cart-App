@@ -7,7 +7,7 @@ import Auth from "./components/Auth";
 
 import Layout from "./components/Layout";
 import { useDispatch, useSelector } from "react-redux";
-import { uiActions } from "./store/ui-slice";
+// import { uiActions } from "./store/ui-slice";
 import { sendCartData, fetchData } from "./store/cart-actions";
 let isFirstRender = true;
 

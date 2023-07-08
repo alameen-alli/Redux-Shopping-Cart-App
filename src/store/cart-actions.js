@@ -46,6 +46,7 @@ export const sendCartData = (cart) => {
         }
       );
       const data = await res.json();
+      console.log(data);
       // Send state as Request is successful
       dispatch(
         uiActions.showNotification({
