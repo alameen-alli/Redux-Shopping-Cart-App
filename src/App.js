@@ -8,7 +8,7 @@ import Auth from "./components/Auth";
 import Layout from "./components/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "./store/ui-slice";
-import { sendCartData } from "./store/cart-slice";
+import { sendCartData, fetchData } from "./store/cart-actions";
 let isFirstRender = true;
 
 function App() {
@@ -20,13 +20,20 @@ function App() {
   
 
   useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
+
+
+  useEffect(() => {
 
     if (isFirstRender) {
       isFirstRender = false;
       return
     };
 
-    dispatch(sendCartData(cart));
+    if (cart.changed) {
+      dispatch(sendCartData(cart));
+    };
   }, [cart, dispatch]);
 
   // if (notification && notification.type) {
